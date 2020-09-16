@@ -9,10 +9,7 @@ Hackenge (Hackathon + Challenge) proposta pela cadeira IF977 - Engenharia de Sof
 
 ## Equipe
 
-Alexandre Burle (aqb)
-
-Danilo Vaz (dvma)
-
-Matheus Vinícius (mvtna)
-
-Uanderson Ricardo (urfs)
+- Alexandre Burle (aqb)
+- Danilo Vaz (dvma)
+- Matheus Vinícius (mvtna)
+- Uanderson Ricardo (urfs)
