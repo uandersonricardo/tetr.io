@@ -1,6 +1,7 @@
 # tetr.io
 
 ## Sobre o jogo
+
 Hackenge (Hackathon + Challenge) proposta pela cadeira IF977 - Engenharia de Software, cujo objetivo é desenvolver um jogo de Tetris em Javascript
 
 ## Como jogar
