@@ -6,6 +6,8 @@ Hackenge (Hackathon + Challenge) proposta pela cadeira IF977 - Engenharia de Sof
 
 ## Como jogar
 
+https://uandersonricardo.github.io/tetr.io/
+
 ## Capturas de tela
 
 ## Equipe
