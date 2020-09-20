@@ -6,6 +6,7 @@ import { config } from "./config.js";
 let grid = new Grid(10, 16);
 let currentFrame = 0;
 let currentBlock = null;
+let nextBlock = null;
 
 // Eventos
 document.addEventListener("DOMContentLoaded", setup);
@@ -19,6 +20,7 @@ function setup() {
   const keysBlocks = Object.keys(blocks);
   const randomFirstBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
   const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+
   currentBlock = new Block(randomFirstBlock);
   nextBlock = new Block(randomNextBlock);
 }
@@ -26,12 +28,19 @@ function setup() {
 function draw() {
   if (currentFrame === 0) {
     grid.update();
-    currentBlock.moveDown();
-    grid.insert(currentBlock);
-    currentBlock = nextBlock;
 
-    const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
-    nextBlock = new Block(randomNextBlock);
+    if(!willCollide()){
+      currentBlock.moveDown();
+    }
+    else{
+      console.log("New Block");
+
+      currentBlock = nextBlock;
+      const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+      nextBlock = new Block(randomNextBlock);
+    }
+    
+    grid.insert(currentBlock);
   }
 
   currentFrame = (currentFrame + 1) % config.FPS;
@@ -58,4 +67,14 @@ function control(e) {
       grid.insert(currentBlock);
       break;
   }
+}
+
+function willCollide(){
+  let collision = false;
+
+  if(currentBlock.y == config.gridHeight - currentBlock.height){
+    collision = true;
+  }
+
+  return collision
 }
