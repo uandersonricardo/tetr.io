@@ -6,13 +6,19 @@ import { config } from "./config.js";
 let grid = new Grid(10, 16);
 let currentFrame = 0;
 let currentBlock = null;
-
-// Eventos
-document.addEventListener("DOMContentLoaded", setup);
-document.addEventListener("keydown", control);
-setInterval(draw, 1000 / config.FPS);
+let player = {
+  name: "",
+  score: 0
+};
 
 // Funções
+function startGame(name) {
+  player.name = name;
+  setup();
+  document.addEventListener("keydown", control);
+  setInterval(draw, 1000 / config.FPS);
+}
+
 function setup() {
   grid.draw();
 
@@ -39,7 +45,9 @@ function control(e) {
       grid.insert(currentBlock);
       break;
     case 38:
-      // rotate
+      grid.update();
+      currentBlock.rotate();
+      grid.insert(currentBlock);
       break;
     case 39:
       grid.update();
@@ -53,3 +61,5 @@ function control(e) {
       break;
   }
 }
+
+export { startGame };
