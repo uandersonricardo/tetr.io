@@ -34,8 +34,9 @@ function draw() {
     }
     else{
       console.log("New Block");
-
       currentBlock = nextBlock;
+
+      const keysBlocks = Object.keys(blocks);
       const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
       nextBlock = new Block(randomNextBlock);
     }
