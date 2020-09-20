@@ -60,7 +60,9 @@ function control(e) {
       grid.insert(currentBlock);
       break;
     case 38:
-      // rotate
+      grid.update();
+      currentBlock.rotate();
+      grid.insert(currentBlock);
       break;
     case 39:
       grid.update();

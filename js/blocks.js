@@ -46,6 +46,25 @@ class Block {
   moveUp() {
     this.y = Math.max(this.y - 1, 0);
   }
+
+  rotate() {
+    let theta = this.tetromino.reduce((omega, alpha) => omega.concat(alpha));
+    let delta = [];
+
+    for(let x = 0; x < this.tetromino[0].length; x++) {
+      let i = x;
+      delta[x] = [];
+      while(i < theta.length) {     
+        delta[x].push(theta[i]);
+        i += this.tetromino[0].length;
+      }
+      delta[x].reverse();
+    }
+
+    this.tetromino = delta;
+    this.width = this.tetromino[0].length;
+    this.height = this.tetromino.length;
+  }
 }
 
 export { blocks, Block, NextBlock };
