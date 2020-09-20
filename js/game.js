@@ -43,6 +43,8 @@ function draw() {
     }
     else{
       console.log("New Block");
+      fillMatrix();
+
       currentBlock = nextBlock;
 
       const keysBlocks = Object.keys(blocks);
@@ -50,8 +52,8 @@ function draw() {
       nextBlock = new Block(randomNextBlock);
     }
     
-    //gridNextBlock.update();
-    //gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
+    gridNextBlock.update();
+    gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
     grid.insert(currentBlock);
   }
 
@@ -59,11 +61,18 @@ function draw() {
 }
 
 function control(e) {
+
   switch(e.keyCode) {
     case 37:
       grid.update();
       currentBlock.moveLeft();
+      
+      if(grid.hasCollision(currentBlock)){
+        currentBlock.moveRight();
+      }
+
       grid.insert(currentBlock);
+
       break;
     case 38:
       grid.update();
@@ -73,24 +82,58 @@ function control(e) {
     case 39:
       grid.update();
       currentBlock.moveRight();
+
+      if(grid.hasCollision(currentBlock)){
+        currentBlock.moveLeft();
+      }
+
       grid.insert(currentBlock);
+
       break;
     case 40:
       grid.update();
       currentBlock.moveDown();
+
+      if(grid.hasCollision(currentBlock)){
+        currentBlock.moveUp();
+      }
+
       grid.insert(currentBlock);
+
       break;
   }
+
 }
 
 function willCollide(){
   let collision = false;
+  
+  let auxBlock = currentBlock;
+  auxBlock.moveDown();
 
-  if(currentBlock.y == config.gridHeight - currentBlock.height){
+  if(grid.hasCollision(auxBlock) || currentBlock.y === config.gridHeight - currentBlock.height){
     collision = true;
   }
 
   return collision
+}
+
+function fillMatrix(){
+
+  for (let i = 0; i < currentBlock.height; i++) {
+    for (let j = 0; j < currentBlock.width; j++) {
+      if (currentBlock.tetromino[i][j]) {
+        console.log("Preenchendo: ", i, j)
+        const row = currentBlock.y + i;
+        const col = currentBlock.x + j;
+
+        console.log(row, col, row * grid.width + col)
+        grid.matrix[row][col] = 1;
+
+      }
+    }
+  }
+
 }
 
 export { startGame };

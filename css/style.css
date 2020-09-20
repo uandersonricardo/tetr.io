@@ -40,7 +40,7 @@ html, body {
 }
 
 .next {
-  display: next;
+  display: grid;
   height: 100vh;
   width: calc(100vh * var(--gridWidth) / var(--gridHeight));
   grid-template-columns: repeat(var(--gridWidth), 1fr);
