@@ -1,11 +1,14 @@
-import { blocks, Block } from "./blocks.js";
+import { blocks, Block, NextBlock } from "./blocks.js";
 import { Grid } from './grid.js';
+import { GridNext } from './gridNext.js';
 import { config } from "./config.js";
 
 // Variáveis globais
 let grid = new Grid(10, 16);
+let gridNextBlock = new GridNext(4, 4);
 let currentFrame = 0;
 let currentBlock = null;
+let nextBlock = null;
 
 // Eventos
 document.addEventListener("DOMContentLoaded", setup);
@@ -15,16 +18,34 @@ setInterval(draw, 1000 / config.FPS);
 // Funções
 function setup() {
   grid.draw();
+  gridNextBlock.draw();
 
   const keysBlocks = Object.keys(blocks);
-  const randomBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
-  currentBlock = new Block(randomBlock);
+  const randomFirstBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+  const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+
+  currentBlock = new Block(randomFirstBlock);
+  nextBlock = new Block(randomNextBlock);
 }
 
 function draw() {
   if (currentFrame === 0) {
     grid.update();
-    currentBlock.moveDown();
+
+    if(!willCollide()){
+      currentBlock.moveDown();
+    }
+    else{
+      console.log("New Block");
+      currentBlock = nextBlock;
+
+      const keysBlocks = Object.keys(blocks);
+      const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+      nextBlock = new Block(randomNextBlock);
+    }
+    
+    //gridNextBlock.update();
+    //gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
     grid.insert(currentBlock);
   }
 
@@ -52,4 +73,14 @@ function control(e) {
       grid.insert(currentBlock);
       break;
   }
+}
+
+function willCollide(){
+  let collision = false;
+
+  if(currentBlock.y == config.gridHeight - currentBlock.height){
+    collision = true;
+  }
+
+  return collision
 }

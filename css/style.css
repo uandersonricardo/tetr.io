@@ -28,3 +28,11 @@ html, body {
 .grid-item.block {
   background-color: #ffffff;
 }
+
+.next {
+  display: next;
+  height: 100vh;
+  width: 62.5vh;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 4px;
+}
