@@ -38,11 +38,11 @@ function draw() {
   if (currentFrame === 0) {
     grid.update();
 
-    if(!willCollide()){
-      currentBlock.moveDown();
-    }
-    else{
-      console.log("New Block");
+    currentBlock.moveDown();
+    if(grid.hasCollision(currentBlock) || currentBlock.y >= config.gridHeight - currentBlock.height) {
+      if (grid.hasCollision(currentBlock)) {
+        currentBlock.moveUp();
+      }
       fillMatrix();
 
       currentBlock = nextBlock;
@@ -104,7 +104,7 @@ function control(e) {
   }
 
 }
-
+/* 
 function willCollide(){
   let collision = false;
   
@@ -116,20 +116,20 @@ function willCollide(){
   }
 
   return collision
-}
+} */
 
 function fillMatrix(){
 
   for (let i = 0; i < currentBlock.height; i++) {
     for (let j = 0; j < currentBlock.width; j++) {
       if (currentBlock.tetromino[i][j]) {
-        console.log("Preenchendo: ", i, j)
+        //console.log("Preenchendo: ", i, j)
         const row = currentBlock.y + i;
         const col = currentBlock.x + j;
 
-        console.log(row, col, row * grid.width + col)
+        //console.log(row, col, row * grid.width + col)
         grid.matrix[row][col] = 1;
-
+        console.log(grid.matrix);
       }
     }
   }
