@@ -1,9 +1,11 @@
-import { blocks, Block } from "./blocks.js";
+import { blocks, Block, NextBlock } from "./blocks.js";
 import { Grid } from './grid.js';
+import { GridNext } from './gridNext.js';
 import { config } from "./config.js";
 
 // Variáveis globais
 let grid = new Grid(10, 16);
+let gridNextBlock = new GridNext(4, 4);
 let currentFrame = 0;
 let currentBlock = null;
 let nextBlock = null;
@@ -16,6 +18,7 @@ setInterval(draw, 1000 / config.FPS);
 // Funções
 function setup() {
   grid.draw();
+  gridNextBlock.draw();
 
   const keysBlocks = Object.keys(blocks);
   const randomFirstBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
@@ -41,6 +44,8 @@ function draw() {
       nextBlock = new Block(randomNextBlock);
     }
     
+    //gridNextBlock.update();
+    //gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
     grid.insert(currentBlock);
   }
 
