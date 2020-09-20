@@ -17,8 +17,10 @@ function setup() {
   grid.draw();
 
   const keysBlocks = Object.keys(blocks);
-  const randomBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
-  currentBlock = new Block(randomBlock);
+  const randomFirstBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+  const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+  currentBlock = new Block(randomFirstBlock);
+  nextBlock = new Block(randomNextBlock);
 }
 
 function draw() {
@@ -26,6 +28,10 @@ function draw() {
     grid.update();
     currentBlock.moveDown();
     grid.insert(currentBlock);
+    currentBlock = nextBlock;
+
+    const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+    nextBlock = new Block(randomNextBlock);
   }
 
   currentFrame = (currentFrame + 1) % config.FPS;
