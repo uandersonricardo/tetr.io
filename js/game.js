@@ -151,7 +151,7 @@ function gameOver() {
   document.removeEventListener("score", score);
   clearInterval(timer);
   updateRanking();
-  document.querySelector(".score-text").innerHTML = "Placar: " + player.score;
+  document.querySelector(".score-text").innerHTML = "Você fez " + player.score + " pontos!";
   document.querySelector(".game").classList.add("d-none");
   document.querySelector(".score").classList.remove("d-none");
 }
@@ -162,6 +162,19 @@ function updateRanking() {
   ranking.sort((a, b) => { return b.score - a.score });
   const newRanking = ranking.slice(0, 5);
   localStorage.setItem('ranking', JSON.stringify(newRanking));
+
+  document.querySelectorAll(".score-table td").forEach((item, index) => {
+    const row = parseInt(index / 3);
+    const col = index % 3;
+
+    console.log(row, col, newRanking[row]);
+
+    if (col === 1) {
+      item.innerHTML = newRanking[row] === undefined ? "-" : newRanking[row].name;
+    } else if (col == 2) {
+      item.innerHTML = newRanking[row] === undefined ? "-" : newRanking[row].score;
+    }
+  });
 }
 
 export { startGame };

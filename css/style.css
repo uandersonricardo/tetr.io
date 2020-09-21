@@ -149,8 +149,14 @@ html, body {
 }
 
 .score-text {
-  margin-top: 1.5rem;
-  color: white;
+  background: #ffffff;
+  padding: 1rem 0;
+  width: 40%;
+  text-align: center;
+  color: var(--primary);
+  font-weight: bold;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .reset-button {
@@ -215,6 +221,7 @@ html, body {
   width: 40%;
   color: white;
   font-size: 1.25rem;
+  text-align: center;
 }
 
 .top-score-text {
