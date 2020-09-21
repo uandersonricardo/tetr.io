@@ -4,27 +4,33 @@ import { GridNext } from './gridNext.js';
 import { config } from "./config.js";
 
 // Variáveis globais
-let grid = new Grid(10, 16);
-let gridNextBlock = new GridNext(4, 4);
+let grid = null;
+let gridNextBlock = null;
 let currentFrame = 0;
 let currentBlock = null;
 let nextBlock = null;
+let timer = null;
 let player = {
   name: "",
   score: 0
 };
 
 // Funções
-function startGame() {
+function startGame(name) {
+  grid = new Grid(10, 16);
+  gridNextBlock = new GridNext(4, 4);
   player.name = name;
+  player.score = 0;
   setup();
   document.addEventListener("keydown", control);
-  setInterval(draw, 1000 / config.FPS);
+  document.addEventListener("score", score);
+  timer = setInterval(draw, 1000 / config.FPS);
 }
 
 function setup() {
   grid.draw();
   gridNextBlock.draw();
+  document.querySelector(".next-score-text").innerHTML = "Placar: " + player.score;
 
   const keysBlocks = Object.keys(blocks);
   const randomFirstBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
@@ -41,9 +47,20 @@ function draw() {
     currentBlock.moveDown();
     if(grid.hasCollision(currentBlock) || currentBlock.y >= config.gridHeight - currentBlock.height) {
       if (grid.hasCollision(currentBlock)) {
+        if (currentBlock.y <= 0) {
+          gameOver();
+          return;
+        }
+
         currentBlock.moveUp();
       }
+      
       fillMatrix();
+      grid.verify();
+
+      gridNextBlock.update();
+      gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
+      grid.insert(currentBlock);
 
       currentBlock = nextBlock;
 
@@ -67,7 +84,7 @@ function control(e) {
       grid.update();
       currentBlock.moveLeft();
       
-      if(grid.hasCollision(currentBlock)){
+      if(grid.hasCollision(currentBlock)) {
         currentBlock.moveRight();
       }
 
@@ -77,13 +94,18 @@ function control(e) {
     case 38:
       grid.update();
       currentBlock.rotate();
+
+      if(grid.hasCollision(currentBlock) || currentBlock.x < 0 || currentBlock.x + currentBlock.width > grid.width) {
+        currentBlock.derotate();
+      }
+
       grid.insert(currentBlock);
       break;
     case 39:
       grid.update();
       currentBlock.moveRight();
 
-      if(grid.hasCollision(currentBlock)){
+      if(grid.hasCollision(currentBlock)) {
         currentBlock.moveLeft();
       }
 
@@ -94,7 +116,7 @@ function control(e) {
       grid.update();
       currentBlock.moveDown();
 
-      if(grid.hasCollision(currentBlock)){
+      if(grid.hasCollision(currentBlock)) {
         currentBlock.moveUp();
       }
 
@@ -104,36 +126,32 @@ function control(e) {
   }
 
 }
-/* 
-function willCollide(){
-  let collision = false;
-  
-  let auxBlock = currentBlock;
-  auxBlock.moveDown();
 
-  if(grid.hasCollision(auxBlock) || currentBlock.y === config.gridHeight - currentBlock.height){
-    collision = true;
-  }
-
-  return collision
-} */
-
-function fillMatrix(){
-
+function fillMatrix() {
   for (let i = 0; i < currentBlock.height; i++) {
     for (let j = 0; j < currentBlock.width; j++) {
       if (currentBlock.tetromino[i][j]) {
-        //console.log("Preenchendo: ", i, j)
         const row = currentBlock.y + i;
         const col = currentBlock.x + j;
 
-        //console.log(row, col, row * grid.width + col)
         grid.matrix[row][col] = 1;
-        console.log(grid.matrix);
       }
     }
   }
 
+}
+
+function score() {
+  player.score += 10;
+  document.querySelector(".next-score-text").innerHTML = "Placar: " + player.score;
+}
+
+function gameOver() {
+  document.removeEventListener("keydown", control);
+  document.removeEventListener("score", score);
+  clearInterval(timer);
+  document.querySelector(".game").classList.add("d-none");
+  document.querySelector(".score").classList.remove("d-none");
 }
 
 export { startGame };

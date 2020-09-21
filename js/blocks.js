@@ -65,6 +65,12 @@ class Block {
     this.width = this.tetromino[0].length;
     this.height = this.tetromino.length;
   }
+
+  derotate() {
+    for (let i = 0; i < 3; i++) {
+      this.rotate();
+    }
+  }
 }
 
 export { blocks, Block, NextBlock };
