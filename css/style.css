@@ -20,7 +20,6 @@ html, body {
   width: 100%;
   height: 100%;
   justify-content: center;
-  align-items: center;
 }
 
 .grid {
@@ -40,11 +39,12 @@ html, body {
 }
 
 .next {
-  display: next;
-  height: 100vh;
-  width: calc(100vh * var(--gridWidth) / var(--gridHeight));
-  grid-template-columns: repeat(var(--gridWidth), 1fr);
+  display: grid;
+  height: 25vh;
+  width: 25vh;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 4px;
+  margin: 1rem 0;
 }
 
 .d-none {
@@ -137,4 +137,50 @@ html, body {
 .confirm-button-modal:hover {
   background-color: #ffffff7f!important;
   color: white!important;
+}
+
+.score {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.score-text {
+  margin-top: 1.5rem;
+  color: white;
+}
+
+.reset-button {
+  background: white;
+  color: #ff7751;
+  font-size: 1rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 0;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: color 0.25s, background-color 0.25s;
+}
+
+.reset-button:hover {
+  background-color: #ffffff7f;
+  color: white;
+}
+
+.next-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3rem;
+  color: white;
+  padding: 1rem 0;
+}
+
+.next-score-text {
+  text-align: center;
 }

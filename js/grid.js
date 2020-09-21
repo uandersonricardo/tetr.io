@@ -3,7 +3,12 @@ class Grid {
     this.width = width;
     this.height = height;
     this.dom = document.querySelector(".grid");
-    this.matrix = Array(height).fill(Array(width).fill(0));
+    this.matrix = new Array(height);
+    this.scoreEvent = new Event("score");
+    
+    for (let row = 0; row < height; row++) {
+      this.matrix[row] = new Array(width);
+    }
   }
   
   draw() {
@@ -25,6 +30,8 @@ class Grid {
   }
 
   update() {
+    //console.log(this.matrix)
+
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
         if (this.matrix[row][col] === 1) {
@@ -49,6 +56,44 @@ class Grid {
         }
       }
     }
+  }
+
+  hasCollision(block) {
+    for (let i = 0; i < block.height; i++) {
+      for (let j = 0; j < block.width; j++) {
+        if (block.tetromino[i][j]) {
+          const row = block.y + i;
+          const col = block.x + j;
+
+          if (row >= 0 && row < this.height && col >= 0 && col < this.width){
+            if (this.dom.children[row * this.width + col].classList.contains("block")) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
+  verify() {
+    for (let row = 0; row < this.height; row++) {
+      if (!this.matrix[row].includes(undefined)) {
+        this.matrix[row] = new Array(this.width);
+        this.moveToFloor(row);
+
+        document.dispatchEvent(this.scoreEvent);
+      }
+    }
+  }
+
+  moveToFloor(row) {
+    for (let i = row; i > 0; i--) {
+      this.matrix[i] = this.matrix[i - 1];
+    }
+
+    this.matrix[0] = new Array(this.width);
   }
 }
 

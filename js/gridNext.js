@@ -37,11 +37,13 @@ class GridNext {
     }
   
     insert(block) {
+
+      console.log(block);
       for (let i = 0; i < block.height; i++) {
         for (let j = 0; j < block.width; j++) {
           if (block.tetromino[i][j]) {
-            const row = block.y + i;
-            const col = block.x + j;
+            const row = i;
+            const col = j;
             
             if (row >= 0 && row < this.height && col >= 0 && col < this.width) {
               this.dom.children[row * this.width + col].classList.add("block");
