@@ -45,9 +45,14 @@ document.querySelector(".reset-button").addEventListener("click", () => {
     }
   }).then((result) => {
     if (result.isConfirmed) {
-      document.querySelector(".main").classList.add("d-none");
+      document.querySelector(".score").classList.add("d-none");
       document.querySelector(".game").classList.remove("d-none");
       startGame(result.value);
     }
   });
+});
+
+document.querySelector(".back-button").addEventListener("click", () => {
+  document.querySelector(".score").classList.add("d-none");
+  document.querySelector(".main").classList.remove("d-none");
 });
