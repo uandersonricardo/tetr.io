@@ -51,3 +51,8 @@ document.querySelector(".reset-button").addEventListener("click", () => {
     }
   });
 });
+
+document.querySelector(".back-button").addEventListener("click", () => {
+  document.querySelector(".score").classList.add("d-none");
+  document.querySelector(".main").classList.remove("d-none");
+});

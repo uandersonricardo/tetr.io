@@ -184,3 +184,45 @@ html, body {
 .next-score-text {
   text-align: center;
 }
+
+.logo {
+  width: 20%;
+}
+
+.back-button {
+  background: #ff7751;
+  color: white;
+  border: 2px solid white;
+  font-size: 1rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  margin-left: 0.5rem;
+}
+
+.back-button:hover {
+  border-color: transparent;
+  background-color: #ffffff7f;
+  color: white;
+}
+
+.score-table {
+  width: 40%;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.top-score-text {
+  color: white;
+}
+
+.scored {
+  animation: spin 1s infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg) scale(0); } }

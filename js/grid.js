@@ -36,8 +36,10 @@ class Grid {
       for (let col = 0; col < this.width; col++) {
         if (this.matrix[row][col] === 1) {
           this.dom.children[row * this.width + col].classList.add("block");
+          this.dom.children[row * this.width + col].classList.remove("scored");
         } else {
           this.dom.children[row * this.width + col].classList.remove("block");
+          this.dom.children[row * this.width + col].classList.remove("scored");
         }
       }
     }
@@ -82,6 +84,10 @@ class Grid {
       if (!this.matrix[row].includes(undefined)) {
         this.matrix[row] = new Array(this.width);
         this.moveToFloor(row);
+
+        for (let col = 0; col < this.width; col++) {
+          this.dom.children[row * this.width + col].classList.add("scored");
+        }
 
         document.dispatchEvent(this.scoreEvent);
       }

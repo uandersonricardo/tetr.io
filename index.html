@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="main">
+  <div class="main d-none">
     <img src="assets/image/logo.png" class="logo" />
     <button class="play-button">Jogar</button>
   </div>
@@ -20,10 +20,45 @@
       <span class="next-score-text">Placar</span>
     </div>
   </div>
-  <div class="score d-none">
-    <img src="assets/image/logo.png" class="logo" />
+  <div class="score">
     <span class="score-text">Seu placar: </span>
-    <button class="reset-button">Reiniciar</button>
+    <span class="top-score-text">Maiores pontuações</span>
+    <table class="score-table">
+      <tr>
+        <th>Posição</th>
+        <th>Jogador</th>
+        <th>Pontuação</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Peter</td>
+        <td>500</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Lois</td>
+        <td>460</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Joe</td>
+        <td>230</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Cleveland</td>
+        <td>210</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Cleveland</td>
+        <td>20</td>
+      </tr>
+    </table>
+    <div>
+      <button class="reset-button">Reiniciar</button>
+      <button class="back-button">Voltar</button>
+    </div>
   </div>
   <!-- <audio src="assets/audio/music.mp3" autoplay hidden loop></audio> !-->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
