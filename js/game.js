@@ -157,7 +157,7 @@ function gameOver() {
 }
 
 function updateRanking() {
-  const ranking = localStorage.getItem('ranking').length > 0 ? JSON.parse(localStorage.getItem('ranking')) : [];
+  const ranking = localStorage.getItem('ranking') && localStorage.getItem('ranking').length > 0 ? JSON.parse(localStorage.getItem('ranking')) : [];
   ranking.push(player);
   ranking.sort((a, b) => { return b.score - a.score });
   const newRanking = ranking.slice(0, 5);
