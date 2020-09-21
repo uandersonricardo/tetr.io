@@ -10,7 +10,7 @@ const blocks = {
     L: [[0, 0, 1], [1, 1, 1]]
 }
 
-class NextBlock{
+class NextBlock {
   constructor(tetromino) {
     this.tetromino = tetromino;
     this.x = parseInt((config.gridNextWidth - tetromino[0].length) / 2);

@@ -37,8 +37,6 @@ class GridNext {
     }
   
     insert(block) {
-
-      console.log(block);
       for (let i = 0; i < block.height; i++) {
         for (let j = 0; j < block.width; j++) {
           if (block.tetromino[i][j]) {
