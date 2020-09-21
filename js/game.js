@@ -3,7 +3,6 @@ import { Grid } from './grid.js';
 import { GridNext } from './gridNext.js';
 import { config } from "./config.js";
 
-// Variáveis globais
 let grid = null;
 let gridNextBlock = null;
 let currentFrame = 0;
@@ -15,13 +14,15 @@ let player = {
   score: 0
 };
 
-// Funções
 function startGame(name) {
   grid = new Grid(10, 16);
   gridNextBlock = new GridNext(4, 4);
   player.name = name;
   player.score = 0;
   setup();
+  const sound = document.getElementById("sound");
+  sound.currentTime = 0;
+  sound.play();
   document.addEventListener("keydown", control);
   document.addEventListener("score", score);
   timer = setInterval(draw, 1000 / config.FPS);
@@ -78,7 +79,6 @@ function draw() {
 }
 
 function control(e) {
-
   switch(e.keyCode) {
     case 37:
       grid.update();
@@ -89,7 +89,6 @@ function control(e) {
       }
 
       grid.insert(currentBlock);
-
       break;
     case 38:
       grid.update();
@@ -110,7 +109,6 @@ function control(e) {
       }
 
       grid.insert(currentBlock);
-
       break;
     case 40:
       grid.update();
@@ -121,10 +119,8 @@ function control(e) {
       }
 
       grid.insert(currentBlock);
-
       break;
   }
-
 }
 
 function fillMatrix() {
@@ -150,6 +146,8 @@ function gameOver() {
   document.removeEventListener("keydown", control);
   document.removeEventListener("score", score);
   clearInterval(timer);
+  const sound = document.getElementById("sound");
+  sound.pause();
   updateRanking();
   document.querySelector(".score-text").innerHTML = "Você fez " + player.score + " pontos!";
   document.querySelector(".game").classList.add("d-none");
@@ -166,8 +164,6 @@ function updateRanking() {
   document.querySelectorAll(".score-table td").forEach((item, index) => {
     const row = parseInt(index / 3);
     const col = index % 3;
-
-    console.log(row, col, newRanking[row]);
 
     if (col === 1) {
       item.innerHTML = newRanking[row] === undefined ? "-" : newRanking[row].name;
