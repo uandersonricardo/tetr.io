@@ -3,7 +3,11 @@ class GridNext {
       this.width = width;
       this.height = height;
       this.dom = document.querySelector(".next");
-      this.matrix = Array(height).fill(Array(width).fill(0));
+      this.matrix = new Array(height);
+      
+      for (let row = 0; row < height; row++) {
+        this.matrix[row] = new Array(width);
+      }
     }
     
     draw() {
@@ -40,8 +44,8 @@ class GridNext {
       for (let i = 0; i < block.height; i++) {
         for (let j = 0; j < block.width; j++) {
           if (block.tetromino[i][j]) {
-            const row = i;
-            const col = j;
+            const row = block.y + i;
+            const col = block.x + j;
             
             if (row >= 0 && row < this.height && col >= 0 && col < this.width) {
               this.dom.children[row * this.width + col].classList.add("block");

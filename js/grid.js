@@ -3,8 +3,8 @@ class Grid {
     this.width = width;
     this.height = height;
     this.dom = document.querySelector(".grid");
-    this.matrix = new Array(height);
     this.scoreEvent = new Event("score");
+    this.matrix = new Array(height);
     
     for (let row = 0; row < height; row++) {
       this.matrix[row] = new Array(width);

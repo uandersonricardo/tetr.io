@@ -14,7 +14,7 @@ class NextBlock {
   constructor(tetromino) {
     this.tetromino = tetromino;
     this.x = parseInt((config.gridNextWidth - tetromino[0].length) / 2);
-    this.y = -tetromino.length;
+    this.y = parseInt((config.gridNextHeight - tetromino.length) / 2);
     this.width = tetromino[0].length;
     this.height = tetromino.length;
     this.rotation = 0;

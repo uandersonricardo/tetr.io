@@ -191,6 +191,10 @@ html, body {
 }
 
 .next-score-text {
+  padding: 1rem;
+  background: white;
+  font-weight: 900;
+  color: var(--primary);
   text-align: center;
 }
 
