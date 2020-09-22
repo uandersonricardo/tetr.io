@@ -22,6 +22,7 @@ function startGame(name) {
   setup();
   const sound = document.getElementById("sound");
   sound.currentTime = 0;
+  sound.volume = document.querySelector(".range").value / 100;
   sound.play();
   document.addEventListener("keydown", control);
   document.addEventListener("score", score);
