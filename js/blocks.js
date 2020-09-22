@@ -17,7 +17,6 @@ class NextBlock {
     this.y = parseInt((config.gridNextHeight - tetromino.length) / 2);
     this.width = tetromino[0].length;
     this.height = tetromino.length;
-    this.rotation = 0;
   }
 }
 
@@ -28,7 +27,6 @@ class Block {
     this.y = -tetromino.length;
     this.width = tetromino[0].length;
     this.height = tetromino.length;
-    this.rotation = 0;
   }
 
   moveLeft() {
