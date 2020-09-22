@@ -240,3 +240,68 @@ html, body {
 }
 
 @keyframes spin { 100% { transform: rotate(360deg) scale(0); } }
+
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background: linear-gradient(to right,
+    white 0%, white 50%,
+    #ffffff22 50%, #ffffff22 100%);
+  cursor: pointer;
+  height: 3px;
+  margin: 0;
+  transition: 0.1s ease-in;
+  vertical-align: middle;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #fff;
+  border-radius: 8px;
+  height: 0;
+  transition: 0.1s ease-in;
+  width: 0;
+}
+
+input[type="range"]::-moz-slider-thumb {
+  -moz-appearance: none;
+  background: #fff;
+  border-radius: 8px;
+  height: 0;
+  transition: 0.1s ease-in;
+  width: 0;
+}
+
+.range-icon {
+  width: 20px;
+  height: auto;
+  margin-right: 0.5rem;
+}
+
+.range-wrap {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  width: 70%;
+}
+
+.range-wrap:hover input[type="range"] {
+  opacity: 1;
+}
+
+.range-wrap:hover input[type="range"]::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.range-wrap:hover input[type="range"]::-moz-slider-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}

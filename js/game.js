@@ -25,6 +25,7 @@ function startGame(name) {
   sound.play();
   document.addEventListener("keydown", control);
   document.addEventListener("score", score);
+  document.querySelector(".range").addEventListener("change", volume);
   timer = setInterval(draw, 1000 / config.FPS);
 }
 
@@ -134,7 +135,6 @@ function fillMatrix() {
       }
     }
   }
-
 }
 
 function score() {
@@ -171,6 +171,12 @@ function updateRanking() {
       item.innerHTML = newRanking[row] === undefined ? "-" : newRanking[row].score;
     }
   });
+}
+
+function volume(e) {
+  e.target.style.background = "linear-gradient(to right, white 0%, white " + e.target.value + "%, #ffffff2f " + e.target.value + "%, #ffffff7f 100%)";
+  const sound = document.getElementById("sound");
+  sound.volume = e.target.value / 100;
 }
 
 export { startGame };
