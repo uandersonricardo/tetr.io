@@ -4,6 +4,8 @@
 
 Hackenge (Hackathon + Challenge) proposta pela cadeira IF977 - Engenharia de Software, cujo objetivo é desenvolver um jogo de Tetris em Javascript. Além disso, o projeto tem por objetivo introduzir abordagens de manipulação de DOM.
 
+Mais informações sobre o processo de desenvolvimento se encontram no [artigo do Medium](https://medium.com/@matheusvtna/tetr-io-hackenge-20a69bf74338).
+
 ## Como jogar
 
 Mecânicas:
@@ -12,7 +14,7 @@ Mecânicas:
 - ➡️: para mover o bloco para direita
 - ⬆️: para rotacionar o bloco
 
-Clique [AQUI](https://uandersonricardo.github.io/tetr.io/) para jogar.
+[Clique aqui](https://uandersonricardo.github.io/tetr.io/) para jogar.
 
 ## Capturas de tela
 
