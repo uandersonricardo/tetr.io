@@ -16,6 +16,11 @@ document.querySelector(".play-button").addEventListener("click", () => {
       title: 'title-modal',
       input: 'input-modal',
       confirmButton: 'confirm-button-modal',
+    },
+    preConfirm: (input) => {
+      if (input.length === 0) {
+        return false;
+      }
     }
   }).then((result) => {
     if (result.isConfirmed) {
@@ -42,6 +47,11 @@ document.querySelector(".reset-button").addEventListener("click", () => {
       title: 'title-modal',
       input: 'input-modal',
       confirmButton: 'confirm-button-modal',
+    },
+    preConfirm: (input) => {
+      if (input.length === 0) {
+        return false;
+      }
     }
   }).then((result) => {
     if (result.isConfirmed) {

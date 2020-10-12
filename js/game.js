@@ -3,7 +3,6 @@ import { Grid } from './grid.js';
 import { GridNext } from './gridNext.js';
 import { config } from "./config.js";
 
-// Variáveis globais
 let grid = null;
 let gridNextBlock = null;
 let currentFrame = 0;
@@ -15,15 +14,19 @@ let player = {
   score: 0
 };
 
-// Funções
 function startGame(name) {
   grid = new Grid(10, 16);
   gridNextBlock = new GridNext(4, 4);
   player.name = name;
   player.score = 0;
   setup();
+  const sound = document.getElementById("sound");
+  sound.currentTime = 0;
+  sound.volume = document.querySelector(".range").value / 100;
+  sound.play();
   document.addEventListener("keydown", control);
   document.addEventListener("score", score);
+  document.querySelector(".range").addEventListener("change", volume);
   timer = setInterval(draw, 1000 / config.FPS);
 }
 
@@ -78,7 +81,6 @@ function draw() {
 }
 
 function control(e) {
-
   switch(e.keyCode) {
     case 37:
       grid.update();
@@ -89,7 +91,6 @@ function control(e) {
       }
 
       grid.insert(currentBlock);
-
       break;
     case 38:
       grid.update();
@@ -110,7 +111,6 @@ function control(e) {
       }
 
       grid.insert(currentBlock);
-
       break;
     case 40:
       grid.update();
@@ -126,10 +126,8 @@ function control(e) {
       }
 
       grid.insert(currentBlock);
-
       break;
   }
-
 }
 
 function fillMatrix() {
@@ -143,7 +141,6 @@ function fillMatrix() {
       }
     }
   }
-
 }
 
 function score() {
@@ -155,6 +152,8 @@ function gameOver() {
   document.removeEventListener("keydown", control);
   document.removeEventListener("score", score);
   clearInterval(timer);
+  const sound = document.getElementById("sound");
+  sound.pause();
   updateRanking();
   document.querySelector(".score-text").innerHTML = "Você fez " + player.score + " pontos!";
   document.querySelector(".game").classList.add("d-none");
@@ -178,6 +177,12 @@ function updateRanking() {
       item.innerHTML = newRanking[row] === undefined ? "-" : newRanking[row].score;
     }
   });
+}
+
+function volume(e) {
+  e.target.style.background = "linear-gradient(to right, white 0%, white " + e.target.value + "%, #ffffff2f " + e.target.value + "%, #ffffff7f 100%)";
+  const sound = document.getElementById("sound");
+  sound.volume = e.target.value / 100;
 }
 
 export { startGame };

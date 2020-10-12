@@ -10,14 +10,13 @@ const blocks = {
     L: [[0, 0, 1], [1, 1, 1]]
 }
 
-class NextBlock{
+class NextBlock {
   constructor(tetromino) {
     this.tetromino = tetromino;
     this.x = parseInt((config.gridNextWidth - tetromino[0].length) / 2);
-    this.y = -tetromino.length;
+    this.y = parseInt((config.gridNextHeight - tetromino.length) / 2);
     this.width = tetromino[0].length;
     this.height = tetromino.length;
-    this.rotation = 0;
   }
 }
 
@@ -28,7 +27,6 @@ class Block {
     this.y = -tetromino.length;
     this.width = tetromino[0].length;
     this.height = tetromino.length;
-    this.rotation = 0;
   }
 
   moveLeft() {

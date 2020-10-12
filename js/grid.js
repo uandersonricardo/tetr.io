@@ -3,8 +3,8 @@ class Grid {
     this.width = width;
     this.height = height;
     this.dom = document.querySelector(".grid");
-    this.matrix = new Array(height);
     this.scoreEvent = new Event("score");
+    this.matrix = new Array(height);
     
     for (let row = 0; row < height; row++) {
       this.matrix[row] = new Array(width);
@@ -30,8 +30,6 @@ class Grid {
   }
 
   update() {
-    //console.log(this.matrix)
-
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
         if (this.matrix[row][col] === 1) {
@@ -67,10 +65,8 @@ class Grid {
           const row = block.y + i;
           const col = block.x + j;
 
-          if (row >= 0 && row < this.height && col >= 0 && col < this.width){
-            if (this.dom.children[row * this.width + col].classList.contains("block")) {
-              return true;
-            }
+          if (row >= 0 && row < this.height && col >= 0 && col < this.width && this.dom.children[row * this.width + col].classList.contains("block")) {
+            return true;
           }
         }
       }
