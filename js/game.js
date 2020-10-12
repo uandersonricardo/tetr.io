@@ -117,6 +117,11 @@ function control(e) {
       currentBlock.moveDown();
 
       if(grid.hasCollision(currentBlock)) {
+        if (currentBlock.y <= 0) {
+          gameOver();
+          return;
+        }
+        
         currentBlock.moveUp();
       }
 
@@ -166,8 +171,6 @@ function updateRanking() {
   document.querySelectorAll(".score-table td").forEach((item, index) => {
     const row = parseInt(index / 3);
     const col = index % 3;
-
-    console.log(row, col, newRanking[row]);
 
     if (col === 1) {
       item.innerHTML = newRanking[row] === undefined ? "-" : newRanking[row].name;
