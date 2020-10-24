@@ -3,13 +3,13 @@ import { Grid } from './grid.js';
 import { GridNext } from './gridNext.js';
 import { config } from "./config.js";
 
-let grid = null;
-let gridNextBlock = null;
-let currentFrame = 0;
-let currentBlock = null;
-let nextBlock = null;
-let timer = null;
-let player = {
+window.grid = null;
+window.gridNextBlock = null;
+window.currentFrame = 0;
+window.currentBlock = null;
+window.nextBlock = null;
+window.timer = null;
+window.player = {
   name: "",
   score: 0
 };
