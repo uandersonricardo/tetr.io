@@ -9,9 +9,14 @@ window.currentFrame = 0;
 window.currentBlock = null;
 window.nextBlock = null;
 window.timer = null;
+window.speed = 1;
 window.player = {
   name: "",
   score: 0
+};
+
+window.setSpeed = (sp) => {
+  speed = Math.min(sp, config.FPS);
 };
 
 function startGame(name) {
@@ -77,7 +82,7 @@ function draw() {
     grid.insert(currentBlock);
   }
 
-  currentFrame = (currentFrame + 1) % config.FPS;
+  currentFrame = (currentFrame + 1) % (config.FPS / speed);
 }
 
 function control(e) {
