@@ -19,6 +19,8 @@ window.setSpeed = (sp) => {
   speed = Math.min(sp, config.FPS);
 };
 
+window.step = step;
+
 function startGame(name) {
   grid = new Grid(10, 16);
   gridNextBlock = new GridNext(4, 4);
@@ -49,40 +51,46 @@ function setup() {
 }
 
 function draw() {
-  if (currentFrame === 0) {
-    grid.update();
+  if (speed !== 0) {
+    if (currentFrame === 0) {
+      step();
+    }
+  
+    currentFrame = (currentFrame + 1) % (config.FPS / speed);
+  }
+}
 
-    currentBlock.moveDown();
-    if(grid.hasCollision(currentBlock) || currentBlock.y >= config.gridHeight - currentBlock.height) {
-      if (grid.hasCollision(currentBlock)) {
-        if (currentBlock.y <= 0) {
-          gameOver();
-          return;
-        }
+function step() {
+  grid.update();
 
-        currentBlock.moveUp();
+  currentBlock.moveDown();
+  if(grid.hasCollision(currentBlock) || currentBlock.y >= config.gridHeight - currentBlock.height) {
+    if (grid.hasCollision(currentBlock)) {
+      if (currentBlock.y <= 0) {
+        gameOver();
+        return;
       }
-      
-      fillMatrix();
-      grid.verify();
 
-      gridNextBlock.update();
-      gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
-      grid.insert(currentBlock);
-
-      currentBlock = nextBlock;
-
-      const keysBlocks = Object.keys(blocks);
-      const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
-      nextBlock = new Block(randomNextBlock);
+      currentBlock.moveUp();
     }
     
+    fillMatrix();
+    grid.verify();
+
     gridNextBlock.update();
     gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
     grid.insert(currentBlock);
-  }
 
-  currentFrame = (currentFrame + 1) % (config.FPS / speed);
+    currentBlock = nextBlock;
+
+    const keysBlocks = Object.keys(blocks);
+    const randomNextBlock = blocks[keysBlocks[parseInt(Math.random() * keysBlocks.length)]];
+    nextBlock = new Block(randomNextBlock);
+  }
+  
+  gridNextBlock.update();
+  gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
+  grid.insert(currentBlock);
 }
 
 function control(e) {
