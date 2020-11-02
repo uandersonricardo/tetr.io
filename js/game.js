@@ -3,10 +3,18 @@ import { Grid } from './grid.js';
 import { GridNext } from './gridNext.js';
 import { config } from "./config.js";
 
+const states = {
+  LOADING: null,
+  NOTHING: 0,
+  SCORE: 1,
+  GAMEOVER: 2
+};
+
 window.grid = null;
 window.gridNextBlock = null;
 window.currentFrame = 0;
 window.currentBlock = null;
+window.currentState = null;
 window.nextBlock = null;
 window.timer = null;
 window.speed = 1;
@@ -61,6 +69,8 @@ function draw() {
 }
 
 function step() {
+  currentState = states.LOADING;
+  
   grid.update();
 
   currentBlock.moveDown();
@@ -91,6 +101,10 @@ function step() {
   gridNextBlock.update();
   gridNextBlock.insert(new NextBlock(nextBlock.tetromino));
   grid.insert(currentBlock);
+
+  if (currentState === states.LOADING) {
+    currentState = states.NOTHING;
+  }
 }
 
 function control(e) {
@@ -157,11 +171,13 @@ function fillMatrix() {
 }
 
 function score() {
+  currentState = states.SCORE;
   player.score += 10;
   document.querySelector(".next-score-text").innerHTML = "Placar: " + player.score;
 }
 
 function gameOver() {
+  currentState = states.GAMEOVER;
   document.removeEventListener("keydown", control);
   document.removeEventListener("score", score);
   clearInterval(timer);
