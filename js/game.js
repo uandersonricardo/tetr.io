@@ -105,9 +105,13 @@ function step() {
   if (currentState === states.LOADING) {
     currentState = states.NOTHING;
   }
+
 }
 
 function control(e) {
+
+  console.log(currentState);
+
   switch(e.keyCode) {
     case 37:
       grid.update();
